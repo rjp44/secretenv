@@ -2,5 +2,13 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "dotenv": "^16.4.5"
-  }
+  },
+  "name": "dotenv",
+  "version": "1.0.0-secretenv",
+  "description": "Secretenv wrapper for dotenv",
+  "main": "index.js",
+  "repository": "git@github.com:rjp44/secretenv.git",
+  "author": "Rob Pickering <rob@pickering.org>",
+  "license": "MIT",
+  "private": false
 }
