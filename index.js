@@ -5,6 +5,7 @@ let encryptedValue = false;
 let SecretenvValue = () => encryptedValue;
 function config() {
   const { parsed } = dotenv.config(...arguments);
+
   let { SECRETENV_KEY, SECRETENV_VALUE } = process.env;
   const IV_LENGTH = 16;
   let key = false;
@@ -33,7 +34,7 @@ function config() {
   }
 
   if (key) {
-    if (Object.keys(parsed).length > 0 && !SECRETENV_VALUE?.length) {
+    if (parsed && Object.keys(parsed).length > 0 && !SECRETENV_VALUE?.length) {
       encryptedValue = encrypt(JSON.stringify(parsed))
     }
     else if (SECRETENV_VALUE?.length && SECRETENV_VALUE?.split(':')?.length === 2) {
