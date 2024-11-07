@@ -32,10 +32,10 @@ function config() {
   }
 
   if (key) {
-    if (Object.keys(parsed).length > 0 && !key) {
+    if (Object.keys(parsed).length > 0 && !SECRETENV_VALUE?.length) {
       console.log(`SECRETENV_VALUE=${encrypt(JSON.stringify(parsed))}`);
     }
-    else if (key) {
+    else if (SECRETENV_VALUE?.length && SECRETENV_VALUE?.split(':')?.length === 2) {
       const composite_value = decrypt(SECRETENV_VALUE);
       Object.assign(process.env, JSON.parse(composite_value));
     }
