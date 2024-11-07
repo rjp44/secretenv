@@ -1,10 +1,11 @@
 const dotenv = require('dotenv');
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
-
+let encryptedValue = false;
+let SecretenvValue = () => encryptedValue;
 function config() {
   const { parsed } = dotenv.config(...arguments);
-  const { SECRETENV_KEY, SECRETENV_VALUE } = process.env;
+  let { SECRETENV_KEY, SECRETENV_VALUE } = process.env;
   const IV_LENGTH = 16;
   let key = false;
   if (SECRETENV_KEY) {
@@ -33,13 +34,15 @@ function config() {
 
   if (key) {
     if (Object.keys(parsed).length > 0 && !SECRETENV_VALUE?.length) {
-      console.log(`SECRETENV_VALUE=${encrypt(JSON.stringify(parsed))}`);
+      encryptedValue = encrypt(JSON.stringify(parsed))
     }
     else if (SECRETENV_VALUE?.length && SECRETENV_VALUE?.split(':')?.length === 2) {
       const composite_value = decrypt(SECRETENV_VALUE);
-      Object.assign(process.env, JSON.parse(composite_value));
+      parsed = JSON.parse(composite_value);
+      Object.assign(process.env, parsed);
     }
   }
+  return {parsed, encryptedValue}
 }
 
-module.exports = { ...dotenv, config };
+module.exports = { ...dotenv, config, SecretenvValue};
