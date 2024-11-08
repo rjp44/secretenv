@@ -7,7 +7,7 @@
     "secretenv": "./bin/secretenv.js"
   },
   "name": "dotenv",
-  "version": "1.0.2-secretenv",
+  "version": "1.0.3-secretenv",
   "description": "Secretenv wrapper for dotenv",
   "main": "index.js",
   "repository": "git@github.com:rjp44/secretenv.git",

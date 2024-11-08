@@ -5,4 +5,4 @@ const path = process.argv.length >= 3 ? dir.resolve(process.cwd(), process.argv[
 const configArgs = { path };
 
 const { encryptedValue } = require('../index.js').config(configArgs);
-encryptedValue && console.log(`SECRETENV_VALUE=${encryptedValue}`);
+encryptedValue && console.log(`SECRETENV_BUNDLE=${encryptedValue}`);
