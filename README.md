@@ -41,7 +41,7 @@ Notwithstanding the above warning, someone who is not me may end up maintaining 
  Create a new encrypted single bundle in the environment variable `SECRETENV_BUNDLE`:
 
  ```bash
- export `npx secretenv`
+ export `npx secretenv -e`
  ```
 
  This will load the current `.env` file and encrypt it using the key phrase in `SECRETENV_KEY` and output the result to `SECRETENV_BUNDLE` environment variable.
@@ -49,8 +49,10 @@ Notwithstanding the above warning, someone who is not me may end up maintaining 
  Alternatively if you wish to produce a bundle from a different file, you can specify the file name as the first argument to `secretenv`, which will then pass it as the `path` property to the underlying `dotenv` library `config()` initialization method and produce a bundle from that file instead.
 
  ```bash
- export `npx secretenv .env.production`
+ export `npx secretenv -p .env.production -e`
  ```
 Congratulation, you now have a secret bundle! You can transport secrets around your project by setting the `SECRETENV_BUNDLE` and `SECRETENV_KEY` environment variables via, for example, proprietary cloud secrets managers.
+
+Individual environment variables can be decrypted by setting the `SECRETENV_KEY` environment variable and then running `secretenv -r KEY_NAME` which will decrypt the bundle and output the variable contents to stdout.
 
 For extra points, set the `SECRETENV_BUNDLE` and `SECRETENV_KEY` environment variables via different storage mechanisms. This **may** improve security as access to both are needed to rehydrate your container environment. That is unless I'm an idiot and have written the crypto code badly see [above](#overview-and-health-warning).
