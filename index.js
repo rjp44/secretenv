@@ -4,7 +4,8 @@ const algorithm = 'aes-256-cbc';
 let encryptedValue = false;
 let SecretenvValue = () => encryptedValue;
 function config() {
-  let { parsed } = dotenv.config(...arguments);
+  let results = dotenv.config(...arguments);
+  let { parsed } = results;
 
   let { SECRETENV_KEY, SECRETENV_BUNDLE } = process.env;
   const IV_LENGTH = 16;
@@ -43,7 +44,7 @@ function config() {
       Object.assign(process.env, parsed);
     }
   }
-  return {parsed, encryptedValue}
+  return {...results, parsed, encryptedValue}
 }
 
 module.exports = { ...dotenv, config, SecretenvValue};
