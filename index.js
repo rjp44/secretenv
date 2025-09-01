@@ -1,11 +1,13 @@
-const dotenv = require('dotenv');
+const dotenv = require('Odotenv');
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
 let encryptedValue = false;
 let SecretenvValue = () => encryptedValue;
 function config() {
+
   let results = dotenv.config(...arguments);
   let { parsed } = results;
+
 
   let { SECRETENV_KEY, SECRETENV_BUNDLE } = process.env;
   const IV_LENGTH = 16;
@@ -41,9 +43,9 @@ function config() {
     else if (SECRETENV_BUNDLE?.length && SECRETENV_BUNDLE?.split(':')?.length === 2) {
       const composite_value = decrypt(SECRETENV_BUNDLE);
       parsed = JSON.parse(composite_value);
-      Object.assign(process.env, parsed);
     }
   }
+  Object.assign(process.env, parsed);
   return {...results, parsed, encryptedValue}
 }
 

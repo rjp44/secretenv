@@ -2,13 +2,23 @@
   "dependencies": {
     "command-line-args": "^6.0.1",
     "crypto": "^1.0.1",
-    "dotenv": "^16.4.5"
+    "Odotenv": "npm:dotenv@^16.4.5"
   },
   "bin": {
     "secretenv": "./bin/secretenv.js"
   },
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./config": {
+      "require": "./config.js",
+      "default": "./config.js"
+    }
+  },
   "name": "dotenv",
-  "version": "1.0.3-secretenv",
+  "version": "1.0.5-secretenv",
   "description": "Secretenv wrapper for dotenv",
   "main": "index.js",
   "repository": "git@github.com:rjp44/secretenv.git",
